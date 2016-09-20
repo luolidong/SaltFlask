@@ -1,0 +1,14 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post" name="saltWeb">
+	{{ form.hidden_tag() }}
+    <p>
+	{{form.serverId.label}} {{form.serverId}}<br>
+	{{form.serverTime.label}} {{form.serverTime}}<br>
+	<div> {{form.serverStart}} {{form.serverClose}} {{form.serverTimeModify}}<div><br>
+	<div> {{form.serverInfo}} {{form.serverLog}} {{form.serverCheck}}<div><br>
+    </p>
+</form>
+{% endblock %}
