@@ -58,7 +58,7 @@ class SaltClient:
 	def ServerCheck(self):
 		ret = []
 		for info in self.serverInfos:
-			result = self.local.cmd(info[0],"cmd.run",["ps -ef | grep hqg | grep -v grep"])
+			result = self.local.cmd(info[0],"cmd.run",["bash /data/control.sh " + info[1] + " s checkprocess &"])
 			for key in result.keys():
 				result[key] = result.get(key).replace('\n', ' | ')
 			ret.append(result)

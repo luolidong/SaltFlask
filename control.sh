@@ -42,7 +42,10 @@ function _list_lost()
 function _operate()
 {
 	local op=$1
+	local serverid=$2
 	local confName=""
+	local hqgName=hqg_$(printf "%02d" $serverId)
+
 	if test `echo $op | grep -c "conf-"` -ne 0 ; then
 		confName=${op##*-}
 		op=${op%-*}
@@ -81,6 +84,9 @@ function _operate()
 			;;
 		conf)
 			cat config | grep $confName
+			;;
+		checkprocess)
+			ps -ef| grep $hqgName | grep -v grep
 			;;
 		*)
 			;;
@@ -138,7 +144,7 @@ function _server_operate()
 			dir_path=${cur_dir}${name}$(printf "%02d" $serverId)/script
 			if [[ -d $dir_path ]]; then
 				cd $dir_path
-				_operate $op
+				_operate $op $serverId
 			else
 				echo "not found $dir_path"
 			fi
@@ -163,7 +169,7 @@ function _server_operate()
 			dir_path=${cur_dir}${name}$(printf "%02d" $serverId)/script/long
 			if [[ -d $dir_path ]]; then
 				cd $dir_path
-				_operate $op
+				_operate $op $serverId
 			else
 				echo "not found $dir_path"
 			fi
@@ -177,7 +183,7 @@ function _server_operate()
 			dir_path=${cur_dir}${name}$(printf "%02d" $serverId)/script/rank
 			if [[ -d $dir_path ]]; then
 				cd $dir_path
-				_operate $op
+				_operate $op $serverId
 			else
 				echo "not found $dir_path"
 			fi
@@ -191,7 +197,7 @@ function _server_operate()
 			dir_path=${cur_dir}${name}$(printf "%02d" $serverId)/script/queue
 			if [[ -d $dir_path ]]; then
 				cd $dir_path
-				_operate $op
+				_operate $op $serverId
 			else
 				echo "not found $dir_path"
 			fi
