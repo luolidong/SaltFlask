@@ -15,8 +15,9 @@ class SaltClient:
 		for key in ret.keys():
 			i = 1 
 			for serverIdConf in ret.get(key).split('\n'):
-				if serverIdConf.split('=')[1] == serverId:
-					self.serverInfos.append((key,str(i)))
+				for serverId in serverIdConf.split('=')[1].split('|'):
+					if serverId == self.serverId:
+						self.serverInfos.append((key,str(i)))
 				i = i + 1
 
 	def ServerStart(self):
