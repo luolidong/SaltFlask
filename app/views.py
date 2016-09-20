@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, request
 from app import app
 from forms import LoginForm,SaltWebForm
-from setting import account
+from setting import account,SALT_FLASK_NAME
 import logging,datetime
 from logging.handlers import RotatingFileHandler
 from saltapi import SaltClient
@@ -10,7 +10,7 @@ import gc
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title = 'Home')
+    return render_template('index.html', title = 'Home',salt_flask_name = SALT_FLASK_NAME)
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -23,7 +23,7 @@ def login():
 			flash("Please enter correct username and password")
 			return redirect('/login')
 
-	return render_template('login.html', form = form,title = 'login')
+	return render_template('login.html', form = form,title = 'login',salt_flask_name = SALT_FLASK_NAME)
 
 @app.route('/logout', methods = ['GET', 'POST'])
 def logout():
@@ -60,5 +60,5 @@ def saltweb():
 		del saltclient
 		gc.collect()
 		return redirect('/saltweb')
-	return render_template('saltweb.html', form = form,title = 'saltweb')
+	return render_template('saltweb.html', form = form,title = 'saltweb', salt_flask_name = SALT_FLASK_NAME)
 
