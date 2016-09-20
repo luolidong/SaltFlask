@@ -9,4 +9,4 @@ if __name__ == '__main__':
 	formatter = logging.Formatter('%(asctime)s - %(message)s')
 	handler.setFormatter(formatter)
 	app.logger.addHandler(handler)
-	app.run(debug = True,host='0.0.0.0')
+	app.run(host='0.0.0.0')
