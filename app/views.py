@@ -59,6 +59,6 @@ def saltweb():
 		app.logger.info(logStr)
 		del saltclient
 		gc.collect()
-		return redirect('/saltweb')
+		return render_template('saltweb.html', form = form,title = 'saltweb', salt_flask_name = SALT_FLASK_NAME)
 	return render_template('saltweb.html', form = form,title = 'saltweb', salt_flask_name = SALT_FLASK_NAME)
 
